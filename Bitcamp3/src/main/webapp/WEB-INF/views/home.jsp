@@ -19,7 +19,5 @@
 
 </html>
 <script>
-
-app.init("${context}")
-
+app.init('${context}');
 </script>
