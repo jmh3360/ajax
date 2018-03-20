@@ -29,11 +29,11 @@ function nav(){
 	+'        <li class="dropdown">'
 	+'          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-expanded="false"> 선택 <span class="caret"></span></a>'
 	+'          <ul class="dropdown-menu" role="menu">'
-	+'            <li><a id="a-burgerking" href="#"> 버거킹 </a></li>'
-	+'            <li><a id="a-kakao" href="#"> 카카오뱅크 </a></li>'
-	+'            <li><a id="a-bitcamp" href="#"> 비트캠프 </a></li>'
-	+'            <li><a id="a-mobile" href="#"> 모바일 </a></li>'
-	+'            <li><a id="a-lotto" href="#"> 로또 </a></li>'
+	+'            <li id = sequence-btn></li>'
+	+'            <li id = math-btn></li>'
+	+'            <li id = array-btn></li>'
+	+'            <li id = sort-btn></li>'
+	+'            <li id = application-btn></li>'
 	+'          </ul>'
 	+'        </li>'
 	+'      </ul>'
@@ -70,6 +70,7 @@ function nav(){
 	+'    </div>'
 	+'  </div>'
 	+'</nav>'
+	
 }
 function createButtonNav1st(){
 	return ' <button id="btn-nav-1st" type="button" '
@@ -81,9 +82,80 @@ function createButtonNav1st(){
 	+'        <span class="icon-bar"></span>'
 	+'      </button>';
 }
-function createButtonLogin(){
+/*function createButtonLogin(){
 	return '<a id="a-login" href="#"> '
 	+'  <span class="glyphicon glyphicon-user" aria-hidden="true">&nbsp;로그인</span>'
 	+'   </a>';
 }
+function sequenceBtn(){
+	return  '<a id="a-burgerking" href="#"> 수열 </a>';
+}
+function mathBtn(){
+	return  '<a id="math-btn" href="#"> 수학 </a>';
+}
+function arrayBtn(){
+	return  '<a id="a-bitcamp" href="#"> 배열 </a>';
+}
+function sortBtn(){
+	return  '<a id="a-mobile" href="#"> 정렬 </a>';
+}
+function ApplicationBtn(){
+	return  '<a id="a-lotto" href="#"> 응용 </a>';
+}
+*/
+var createATag=x=>{
+	return '<a href="#"> '+x+'</a>';
+}
+var createSpan=(x,y)=>{
+	return '<span class="glyphicon '+x+'"  aria-hidden="true">&nbsp'+y+'</span>';
+}
+var createHTag=(x,y)=>{
+	return '<h'+x+'>'+y+'</h'+x+'>';
+	
+}
+var createDiv=(x,y)=>{
+	return '<div id = "'+x+'" class="'+y+'"></div>'
+}
+var createResult=()=>{
+	return '<table>'
+	+'  <tr><td>초기값</td><td>제한값</td><td>공차</td></tr>'
+	+'  <tr><td><input type="text" id = "input-start"></td><td><input id = "input-limit" type="text"></td><td><input id = "input-tolerance" type="text"></td></tr>'
+	+'  <tr><td>결과 값 <button id = "result-btn">go</button></td><td></td></tr>'
+	+'</table>';
+}
+var sequenceMonitor=()=>{
+	//'    <div class="container" style="margin-top: 50px;">'
+	//createHTag=('2',수열 알고 리즘)
+	return '        <table id="tab-algo" class="table table-bordered">'
+    +'            <tr>'
+    +'                <td id = "tab-algo-arith" class="td1" style="width: 400px;"></td>'
+    +'                <td id = "tab-algo-res"  class="td2" rowspan="5" style="width: 400px;"></td>'
+    +'            </tr>'
+    +'            <tr>'
+    +'                <td id = tab-algo-switch></td>'
+    +'            </tr>'
+    +'            <tr>'
+    +'                <td id = tab-algo-geo></td>'
+    +'            </tr>'
+    +'            <tr>'
+    +'                <td id = tab-algo-fact></td>'
+    +'            </tr>'
+    +'            <tr>'
+    +'                <td id = tab-algo-fibo></td>'
+    +'            </tr>'
+    +'        </table>'
+    +'    </div>';
 
+}
+var createUl=(x,y)=>{
+	return '<ul id ="'+x+'" class="'+y+'"></ul>';
+	}
+var createLi=(x,y)=>{
+	return '<li id ="'+x+'" class="'+y+'"></li>';
+}
+var createButton =(x,y,z)=>{
+	return '<button id = "'+x+'" class = "btn '+y+'">'+z+'</button>';
+}
+var createText=x=>{
+	return '<h1 id = "'+x+'"></h1>'
+}
