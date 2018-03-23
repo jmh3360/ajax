@@ -34,11 +34,25 @@ app.member=(()=>{
 			$('#container').append(createDiv('content','login-content'));
 			$('#content').append(loginOutBox('login-inner-table'));
 			
-			$(createButton('login-btn','','LOGIN')).appendTo('#td-login-btn').on('click',()=>{
-				alert('login 버튼 클릭!!')
+			$(createButton('login-btn','','LOGIN')).appendTo('#td-login-btn').on('click',e=>{
+				e.preventDefault();
+				alert('login 버튼 클릭!!');
+				$.ajax({
+					url : context+'/member/login',
+					method : 'POST',
+					data : JSON.stringify(jason),
+					dataType : 'json',
+					contentType : 'application/json',
+					success : x=>{
+						alert('로그인 성공'+x)
+					},
+					error : (x,h,m)=>{
+						alert('로그인에서 에러발생 x='+x+', h='+h+', m='+m);
+					}
+				});
 			});
 			
-			/*+'      <button id="login-btn">LOGIN</button>'*/
+			
 		});
 	};
 	var login=()=>{
