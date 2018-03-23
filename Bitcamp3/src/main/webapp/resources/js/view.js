@@ -1,6 +1,31 @@
 /**
  * 
  */
+var loginOutBox=x=>{
+	return '<table id="'+x+'">'
+	+'    <tr>'
+	+'    <td><input id="login-userid-input" name="userid"'
+	+'              type="text" value="장만호" placeholder="ID" tabindex="1" />'
+	+'    </td>'
+	+'    <td id="td-login-btn" rowspan="2">'
+	
+	+'    </td>'
+	+'    </tr>'
+	+'    <tr>'
+	+'      <td><input id="login-password-input" name="password"'
+	+'        type="password" value="1" placeholder="PASSWORD" tabindex="2" />'
+	+'        <input type="hidden" name="cmd" value="login" />'
+	+'        <input type="hidden" name="page" value="mypage" />'
+	+'      </td>'
+	+'    </tr>'
+	+'  </table> '
+	+' <a id="login-admin-link" href="#"> 관리자 </a>'
+	+'<a id="login-join-link" href="#"> 회원가입 </a>'
+
+}
+var loginInBox=x=>{
+	
+}
 
 function nav(){
 	return '<nav class="navbar navbar-inverse">'
@@ -117,11 +142,71 @@ var createDiv=(x,y)=>{
 	return '<div id = "'+x+'" class="'+y+'"></div>'
 }
 var createResult=()=>{
+	
 	return '<table>'
 	+'  <tr><td>초기값</td><td>제한값</td><td>공차</td></tr>'
 	+'  <tr><td><input type="text" id = "input-start"></td><td><input id = "input-limit" type="text"></td><td><input id = "input-tolerance" type="text"></td></tr>'
 	+'  <tr><td>결과 값 <button id = "result-btn">go</button></td><td></td></tr>'
 	+'</table>';
+}
+var createTab=(x,y,jason,txt,type)=>{
+	var tab ='<table id = "'+x+'" class = "'+y+'">'
+	+'<tr>'
+	+'<th colspan ="5">'+txt+'</th>'
+	+'</tr>';
+	
+	$.each(JSON.parse(jason),(i,j)=>{
+		tab +='<tr>'
+			+'<td >('+i+') '+j.a+'</td>'
+			+'<td >('+i+') '+j.b+'</td>'
+			+'<td >('+i+') '+j.c+'</td>'
+			+'<td >('+i+') '+j.d+'</td>'
+			+'<td >('+i+') '+j.e+'</td>'
+			+'</tr>'
+	});
+	tab += '</table>'
+	return tab ;
+}
+var createArrayTab=(x,y,json,txt,type)=>{
+	var tab ='<table id = "'+x+'" class = "'+y+'">'
+	+'<tr >'
+	+'<th colspan="2">'+txt+'</th>'
+	+'</tr>';
+	$.each(json,(i,j)=>{
+		tab +='<tr>'
+			+'<td id ="left'+i+'" style="width: 50%"><a id="a-'+i+'" href="#"> '+j+'</a></td>'
+			+'<td id ="right'+i+'"></td>'
+			+'</tr>'
+	});
+	
+	return tab;
+}
+var createRes=(type,json)=>{
+	var h = '';
+	$.each(json,(i,j)=>{
+		h +='<p id ="math-res-name-'+i+'">'+j+'</p>'
+			+'<input id="math-res-in-'+i+'" type="'+type+'"/>';
+	});
+	
+	return h;
+}
+var createUl=(x,y)=>{
+	
+	return '<ul id ="'+x+'" class="'+y+'"></ul>';
+}
+var createLi=(x,y)=>{
+	return '<li id ="'+x+'" class="'+y+'"></li>';
+}
+var sequenceMonitor2=()=>{
+	
+	return '        <table id="tab-array" class="table table-bordered">'
+    +'            <tr>'
+    +'                <td id = "tab-array-arith" class="td1" style="width: 400px;"></td>'
+    +'                <td id = "tab-array-res"  class="td2" rowspan="5" style="width: 400px;"></td>'
+    +'            </tr>'
+    +'        </table>';
+
+
 }
 var sequenceMonitor=()=>{
 	//'    <div class="container" style="margin-top: 50px;">'
@@ -143,19 +228,22 @@ var sequenceMonitor=()=>{
     +'            <tr>'
     +'                <td id = tab-algo-fibo></td>'
     +'            </tr>'
-    +'        </table>'
-    +'    </div>';
+    +'        </table>';
 
-}
-var createUl=(x,y)=>{
-	return '<ul id ="'+x+'" class="'+y+'"></ul>';
-	}
-var createLi=(x,y)=>{
-	return '<li id ="'+x+'" class="'+y+'"></li>';
+
 }
 var createButton =(x,y,z)=>{
 	return '<button id = "'+x+'" class = "btn '+y+'">'+z+'</button>';
 }
 var createText=x=>{
 	return '<h1 id = "'+x+'"></h1>'
+}
+var createInput = (x,y)=>{
+	return '<input id = "'+x+'" type = "'+y+'"/>'
+}
+var createTR = (x,y)=>{
+	return '<tr id = "'+x+'">+y+</tr>'
+}
+var createTR = (x,y)=>{
+	return '<tr id = "'+x+'">+y+</tr>'
 }
