@@ -33,7 +33,7 @@ app.member=(()=>{
 			$wrapper.append(createDiv('container','login-container'));
 			$('#container').append(createDiv('content','login-content'));
 			$('#content').append(loginOutBox('login-inner-table'));
-			alert($('#input-start').val());
+			
 			$(createButton('login-btn','','LOGIN')).appendTo('#td-login-btn').on('click',()=>{
 				alert('login 버튼 클릭!!')
 			});
