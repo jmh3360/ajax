@@ -8,7 +8,7 @@ import com.bitcamp.web.domain.Command;
 import com.bitcamp.web.domain.MemberDTO;
 
 @Repository
-public interface MemberMapper {
+public interface Mapper {
 	public void insertMember(Command cmd);
 	public MemberDTO selectMemberById(Command cmd);
 	public int exist(Command cmd);

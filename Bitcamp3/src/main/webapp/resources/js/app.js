@@ -47,7 +47,17 @@ app.member=(()=>{
 					dataType : 'json',
 					contentType : 'application/json',
 					success : x=>{
-						alert('로그인 성공'+x.flag);
+						var id =x.user.id;
+						alert('로그인 성공'+x.user.id);
+						if(x.success==='1'){
+							alert('로그인 성공한 id :'+id);
+							var jason = {
+									id : x.user.id
+							};
+							mypage(jason);
+						}else{
+							alert('로그인 실패'+x.user.id);
+						}
 					},
 					error : (x,h,m)=>{
 						alert('로그인에서 에러발생 x='+x+', h='+h+', m='+m);
@@ -61,7 +71,10 @@ app.member=(()=>{
 	var login=()=>{
 		
 	};
-	return{onCreate:onCreate};
+	var mypage = x=>{
+		alert('마이페이지 로 넘어오는 정보값 '+x.id);
+	};
+	return{onCreate:onCreate,mypage:mypage};
 })();
 // 이방식이 왜 좋다고 한거 였ㅈㅈㅈ?
 app.algorithm =(()=>{
