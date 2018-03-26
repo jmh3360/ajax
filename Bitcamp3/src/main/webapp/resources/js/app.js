@@ -36,6 +36,9 @@ app.member=(()=>{
 			
 			$(createButton('login-btn','','LOGIN')).appendTo('#td-login-btn').on('click',e=>{
 				e.preventDefault();
+				var jason={
+						'id' : $('#login-userid-input').val(),
+						'pass' : $('#login-password-input').val()};
 				alert('login 버튼 클릭!!');
 				$.ajax({
 					url : context+'/member/login',
@@ -44,7 +47,7 @@ app.member=(()=>{
 					dataType : 'json',
 					contentType : 'application/json',
 					success : x=>{
-						alert('로그인 성공'+x)
+						alert('로그인 성공'+x.flag);
 					},
 					error : (x,h,m)=>{
 						alert('로그인에서 에러발생 x='+x+', h='+h+', m='+m);

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <settings>
+          <setting name="cacheEnabled" value="true"/>
+          <setting name="lazyLoadingEnabled" value="true"/>
+          <setting name="multipleResultSetsEnabled" value="true"/>
+          <setting name="useColumnLabel" value="true"/>
+          <setting name="useGeneratedKeys" value="false"/>
+          <setting name="autoMappingBehavior" value="PARTIAL"/>
+          <setting name="defaultExecutorType" value="SIMPLE"/>
+          <setting name="defaultStatementTimeout" value="25"/>
+          <setting name="safeRowBoundsEnabled" value="false"/>
+          <setting name="mapUnderscoreToCamelCase" value="false"/>
+          <setting name="localCacheScope" value="SESSION"/>
+          <setting name="jdbcTypeForNull" value="OTHER"/>
+          <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+    </settings>
+    <!-- 리섵르 타이을 결정한다. -->
+    <typeAliases>
+        <typeAlias type="com.bitcamp.web.domain.MemberDTO" alias="member"/>
+        <typeAlias type="com.bitcamp.web.domain.PhoneDTO" alias="phone"/>
+        <typeAlias type="com.bitcamp.web.domain.AccountDTO" alias="account"/>
+        <typeAlias type="com.bitcamp.web.domain.AdminDTO" alias="admin"/>
+        <typeAlias type="com.bitcamp.web.domain.BoardDTO" alias="board"/>
+        <typeAlias type="com.bitcamp.web.domain.FoodDTO" alias="food"/>
+        <typeAlias type="com.bitcamp.web.domain.TxDTO" alias="tx"/>
+        <typeAlias type="com.bitcamp.web.command.Command" alias="cmd"/>
+        <typeAlias type="com.bitcamp.web.command.ResultMap" alias="rmp"/>
+    </typeAliases>
+    <!-- 쿼리문을 전달할 자바 경로를 맞춰 준다. -->
+ <mappers>
+     <mapper resource="com/bitcamp/web/mapper/MemberMapper.xml"/>
+     <mapper resource="com/bitcamp/web/mapper/PhoneMapper.xml"/>
+     <mapper resource="com/bitcamp/web/mapper/AccountMapper.xml"/>
+     <mapper resource="com/bitcamp/web/mapper/AdminMapper.xml"/>
+     <mapper resource="com/bitcamp/web/mapper/BoardMapper.xml"/>
+     <mapper resource="com/bitcamp/web/mapper/FoodMapper.xml"/>
+     <mapper resource="com/bitcamp/web/mapper/TxMapper.xml"/>
+ </mappers>
+</configuration>
