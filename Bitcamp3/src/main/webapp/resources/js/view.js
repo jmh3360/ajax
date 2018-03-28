@@ -48,8 +48,7 @@ function nav(){
 	+'        <li><a id="a-about" href="#">'
 	+'          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"> about</span>'
 	+'        </a></li>'
-	+'        <li><a id="span-board" href="#">'
-	+'          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"> 게시판</span>'
+	+'        <li id="li-board"><a id="span-board" href="#">'
 	+'        </a></li>'
 	+'        <li class="dropdown">'
 	+'          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-expanded="false"> 선택 <span class="caret"></span></a>'
@@ -129,17 +128,20 @@ function ApplicationBtn(){
 }
 */
 var createATag=x=>{
-	return '<a href="#"> '+x+'</a>';
+	return '<a id ="'+x.id+'" href="#"> '+x.val+'</a>';
 }
-var createSpan=(x,y)=>{
-	return '<span class="glyphicon '+x+'"  aria-hidden="true">&nbsp'+y+'</span>';
+var createATag2=x=>{
+	return '<a id="'+x.id+'" href="#"> '+x.val+'</a>';
 }
-var createHTag=(x,y)=>{
-	return '<h'+x+'>'+y+'</h'+x+'>';
+var createSpan=x=>{
+	return '<span id="'+x.id+'" class="glyphicon '+x.clazz+'"  aria-hidden="true">&nbsp'+x.val+'</span>';
+}
+var createHTag=x=>{
+	return '<h'+x.size+'>'+x.val+'</h'+x.size+'>';
 	
 }
-var createDiv=(x,y)=>{
-	return '<div id = "'+x+'" class="'+y+'"></div>'
+var createDiv=x=>{
+	return '<div id = "'+x.id+'" class="'+x.clazz+'"></div>'
 }
 var createResult=()=>{
 	
@@ -149,13 +151,13 @@ var createResult=()=>{
 	+'  <tr><td>결과 값 <button id = "result-btn">go</button></td><td></td></tr>'
 	+'</table>';
 }
-var createTab=(x,y,jason,txt,type)=>{
-	var tab ='<table id = "'+x+'" class = "'+y+'">'
+var createTab=x=>{
+	var tab ='<table id = "'+x.id+'" class = "'+x.clazz+'">'
 	+'<tr>'
-	+'<th colspan ="5">'+txt+'</th>'
+	+'<th colspan ="5">'+x.txt+'</th>'
 	+'</tr>';
 	
-	$.each(JSON.parse(jason),(i,j)=>{
+	$.each(JSON.parse(x.jason),(i,j)=>{
 		tab +='<tr>'
 			+'<td >('+i+') '+j.a+'</td>'
 			+'<td >('+i+') '+j.b+'</td>'
@@ -167,12 +169,12 @@ var createTab=(x,y,jason,txt,type)=>{
 	tab += '</table>'
 	return tab ;
 }
-var createArrayTab=(x,y,json,txt,type)=>{
-	var tab ='<table id = "'+x+'" class = "'+y+'">'
+var createArrayTab=x=>{
+	var tab ='<table id = "'+x.id+'" class = "'+x.clazz+'">'
 	+'<tr >'
-	+'<th colspan="2">'+txt+'</th>'
+	+'<th colspan="2">'+x.val+'</th>'
 	+'</tr>';
-	$.each(json,(i,j)=>{
+	$.each(x.jason,(i,j)=>{
 		tab +='<tr>'
 			+'<td id ="left'+i+'" style="width: 50%"><a id="a-'+i+'" href="#"> '+j+'</a></td>'
 			+'<td id ="right'+i+'"></td>'
@@ -181,11 +183,28 @@ var createArrayTab=(x,y,json,txt,type)=>{
 	
 	return tab;
 }
-var createRes=(type,json)=>{
+var createMyPageTab=x=>{
+	var tab = '<table id = "'+x.id+'" class = "'+x.clazz+'">'
+
+	var arr = [1,2,3,4];
+	$.each(arr,(i,j)=>{
+		tab +='<tr>'
+			+'<td id ="a'+j+'"></td>'
+			+'<td id ="b'+j+'"></td>'
+			+'<td id ="c'+j+'"></td>'
+			+'<td id ="d'+j+'"></td>'
+			+'<td id ="e'+j+'"></td>'
+			+'</tr>';
+			
+	});
+	tab += '</table>';
+	return tab;
+}
+var createRes=x=>{
 	var h = '';
-	$.each(json,(i,j)=>{
+	$.each(x.jason,(i,j)=>{
 		h +='<p id ="math-res-name-'+i+'">'+j+'</p>'
-			+'<input id="math-res-in-'+i+'" type="'+type+'"/>';
+			+'<input id="math-res-in-'+i+'" type="'+x.type+'"/>';
 	});
 	
 	return h;
@@ -194,7 +213,7 @@ var createUl=(x,y)=>{
 	
 	return '<ul id ="'+x+'" class="'+y+'"></ul>';
 }
-var createLi=(x,y)=>{
+var createLi=(x,y,z)=>{
 	return '<li id ="'+x+'" class="'+y+'"></li>';
 }
 var sequenceMonitor2=()=>{
@@ -232,8 +251,8 @@ var sequenceMonitor=()=>{
 
 
 }
-var createButton =(x,y,z)=>{
-	return '<button id = "'+x+'" class = "btn '+y+'">'+z+'</button>';
+var createButton =x=>{
+	return '<button id = "'+x.id+'" class = "'+x.clazz+'">'+x.val+'</button>';
 }
 var createText=x=>{
 	return '<h1 id = "'+x+'"></h1>'
