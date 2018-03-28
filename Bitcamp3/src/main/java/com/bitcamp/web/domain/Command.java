@@ -10,4 +10,5 @@ import lombok.Data;
 @Component @Lazy
 public class Command {
 	protected String data1,data2;
+	protected Page paging;
 }

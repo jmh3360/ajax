@@ -157,17 +157,59 @@ var createTab=x=>{
 	+'<th colspan ="5">'+x.txt+'</th>'
 	+'</tr>';
 	
-	$.each(JSON.parse(x.jason),(i,j)=>{
+	$.each(x.list,(i,j)=>{
 		tab +='<tr>'
-			+'<td >('+i+') '+j.a+'</td>'
-			+'<td >('+i+') '+j.b+'</td>'
-			+'<td >('+i+') '+j.c+'</td>'
-			+'<td >('+i+') '+j.d+'</td>'
-			+'<td >('+i+') '+j.e+'</td>'
+			+'<td >('+i+') '+j.title+'</td>'
+			+'<td >('+i+') '+j.content+'</td>'
+			+'<td >('+i+') '+j.title+'</td>'
+			+'<td >('+i+') '+j.title+'</td>'
+			+'<td >('+i+') '+j.title+'</td>'
 			+'</tr>'
 	});
 	tab += '</table>'
 	return tab ;
+}
+var setCountArray=x=>{
+    var a = new Array();
+    for(var i=1; i<=x; i++){
+        a.push(i);
+    }
+    return a;
+}
+
+var createTable=x=>{
+	return tab ='<table id ="'+x.id+'" class = "'+x.clazz+'"></table>'
+}
+var createTr=x=>{
+	   var temp = '';
+	   var trnum=0;
+	   $.each(x.trList, (i,j)=>{
+		   trnum++;
+	       temp +='<tr id="tr_'+trnum+'" class="'+x.trClazz+'">'
+	                   +createTd({
+	                       list: j,
+	                       q: trnum,
+	                       clazz: x.tdClazz
+	                       })+'</tr>';
+	   });
+	   return temp;
+	}
+	var createTd=x=>{
+	   var temp = '';
+	   var w=0;
+	    $.each(x.list,(k,j)=>{
+	        w++;
+	        temp +='<td id="td_'+x.q+'_'+w+'" class="'+x.clazz+'">'
+	                                        +'&nbsp;'+j+'</td>';
+	    });
+	   return temp;
+	}
+
+var createTh =x=>{
+	var th = '<tr>';
+	$.each(x.list,(i,j)=>{
+		th+='<th>'+j+'</th>'
+	});
 }
 var createArrayTab=x=>{
 	var tab ='<table id = "'+x.id+'" class = "'+x.clazz+'">'
@@ -259,10 +301,4 @@ var createText=x=>{
 }
 var createInput = (x,y)=>{
 	return '<input id = "'+x+'" type = "'+y+'"/>'
-}
-var createTR = (x,y)=>{
-	return '<tr id = "'+x+'">+y+</tr>'
-}
-var createTR = (x,y)=>{
-	return '<tr id = "'+x+'">+y+</tr>'
 }

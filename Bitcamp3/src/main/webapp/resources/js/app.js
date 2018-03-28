@@ -6,41 +6,51 @@ var app = app || {};
 
 
 //최상의 객체의 두개 이상의 객체가 생성되면 안된다.
-app=(()=>{
-	
-	var init=x=>{
+app={init:x=>{
 		$.getScript(x+'/resources/js/router.js',()=>{
 			$.extend(new Router(x));
 			app.algorithm.onCreate();
 			app.member.onCreate();
-			app.board.onCreate();
-		});
-	};
-	return{init:init};
-})();//로컬 호스트 에러 문제일 때 실행 할때 필요한 ()를 안넣어줘서 Error 남
-app.board=(()=>{
-	var $wrapper,context,algo,view,image
-	var onCreate=()=>{
-		algo = $.javascript()+'/algo.js';
-		view = $.javascript()+'/view.js'
-		setContentView();
-	};
-	var setContentView=()=>{
-		$.getScript(view,()=>{
-			var json = null;
-			$('#span-board').remove();
-			$('#a-board').remove();
-			$(createATag({id:'a-board', val : 
-			createSpan({id:'nav-board', clazz : 'glyphicon-map-marker',val : '게시판'})})).
-			appendTo('#li-board').
-			on('click',()=>{
-				alert('보드로 오너라');
-			});
-		});
 			
-	};
-	return{onCreate:onCreate};
-})();
+		})
+}};
+app.board={
+		//이렇게 표현하는 방식을
+		
+		articles : x=>{
+			//아래의 친구는 에러 메세지가 아예 없다.
+			//얘는 db 를 받기만 하는 친구라 에러가 발생이 안하는 거란다.
+
+			$.getJSON(x+'/articles',y=>{
+				
+				$.getScript(x+'/resources/js/view.js',()=>{
+					alert('뭐라도 나와라');
+					$('#content').empty();
+					$(createTable({id : 'articles',clazz:'table-bordered'})).
+					appendTo('#content');
+					$(createTh({list:['글 번호','글 제목','작성자','작성일','수정/삭제'],
+					clazz:''})).appendTo('articles');
+					  $(createTr({
+		                    trList: y,
+		                    trClazz: '',
+		                    tdList: '',
+		                    tdClazz: ''
+		                }))
+		                .appendTo('#articles');
+					
+		
+					/*$('#container').html(createTab({list:y,id:'articles-tab',clazz:'table-bordered'}));*/
+					/*$('#container').html(createTable({id:'board-table',clazz:'table-bordered'}));
+					$(createTr({trSize:setCountArray(1),tdSize:setCountArray(5),tdId:'td-board-',trId:'tr-board-'}));*/
+				});
+				
+				
+			});
+			
+		}
+}	
+//로컬 호스트 에러 문제일 때 실행 할때 필요한 ()를 안넣어줘서 Error 남
+
 app.member=(()=>{
 	var $wrapper,context,algo,view,image,$monitor;
 	var onCreate =()=>{
@@ -152,6 +162,14 @@ app.algorithm =(()=>{
 		$.getScript(view,()=>{
 			$wrapper.html(nav());
 			
+			$('#span-board').remove();
+			$('#a-board').remove();
+			$(createATag({id:'a-board', val : 
+			createSpan({id:'nav-board', clazz : 'glyphicon-map-marker',val : '게시판'})})).
+			appendTo('#li-board').
+			on('click',()=>{
+				app.board.articles(context);
+			});
 			$(createButtonNav1st()).appendTo($('#btn-nav-1st')).click(()=>{
 				alert('Button Click!!');
 			});

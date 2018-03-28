@@ -1,6 +1,7 @@
 package com.bitcamp.web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.LoggerFactory;
@@ -9,14 +10,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bitcamp.web.domain.Command;
 import com.bitcamp.web.domain.MemberDTO;
+import com.bitcamp.web.domain.Page;
 import com.bitcamp.web.mapper.Mapper;
 import com.bitcamp.web.service.ICountService;
 import com.bitcamp.web.service.IGetService;
+import com.bitcamp.web.util.PageAdapter;
 
 
 
@@ -29,6 +31,8 @@ public class MemberController {
 	@Autowired Mapper mapper;
 	@Autowired Command cmd;
 	@Autowired MemberDTO member;
+	@Autowired Page page;
+	@Autowired PageAdapter adapter;
 	@RequestMapping(value="/members/{userid}/login",
 			method=RequestMethod.POST,consumes="application/json")
 	public /*@ResponseBody*/ Map<?,?> getUserId(
@@ -75,10 +79,26 @@ public class MemberController {
 		
 		return map;
 	}
-	@RequestMapping(value="/articles",
-			method=RequestMethod.POST,consumes="application/json")
+	@RequestMapping(value="/articles")
 	public Map<?,?> getArticles(){
-		Map<String,Object> map = new HashMap<>();
+		Map<String,Object>map = new HashMap<>();
+				List<?> list = (List<?>) new IGetService() {
+			
+			@Override
+			public Object execute(Command cmd) {
+				return mapper.articles(cmd);
+			}
+		}.execute(cmd);
+		page.setPageNum(1);
+		page.setBlockSize(5);
+		page.setPageSize(5);
+		page.setTotalCount(0);
+		page = (Page) adapter.attr(page);
+		
+		map.put("page", page);
+		/*for(Object o : list) {
+			System.out.println("게시글"+(BoardDTO)o);
+		}*/
 		return map;
 	}
 	@RequestMapping(value="/boards/{seq}",
@@ -87,7 +107,8 @@ public class MemberController {
 		Map<String,Object> map = new HashMap<>();
 		return map;
 	}
-	@RequestMapping(value="/boards/{seq}",
+	//리퀘스트 맵핑의 이름이 같으면 에러가 발생한다.
+	@RequestMapping(value="/board/{seq}",
 			method=RequestMethod.POST,consumes="application/json")
 	public Map<?,?> putArticle(){
 		Map<String,Object> map = new HashMap<>();
