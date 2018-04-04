@@ -1,15 +1,12 @@
 package com.bitcamp.web.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.bitcamp.web.domain.Command;
 import com.bitcamp.web.domain.Page;
 
 @Component
 public class PageAdapter {
-	@Autowired Command cmd;
-    
+  
 	public Object attr(Page page) {
 		
         System.out.println("전체 게시글 수 : " +page.getTotalCount());
@@ -26,10 +23,11 @@ public class PageAdapter {
         page.setStartRow(0);
         System.out.println("로우 스타트 : "+page.getStartRow());
         page.setEndRow(0);
+        page.setPageNext(0);
+        page.setPagePrev(0);
         System.out.println("로우 엔드 : "+page.getEndRow());
         System.out.println("=============페이징 종료==============");
-        cmd = new Command();
-        cmd.setPaging(page);
-        return cmd;
+
+        return page;
     }
 }

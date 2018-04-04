@@ -1,17 +1,17 @@
 package com.bitcamp.web.domain;
 
-import java.util.List;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import lombok.Data;
 
-@Data
+
+
 @Component @Lazy
 public class Page {
 	int pageNum,totalCount,totalPage,pageSize,blockSize,
-    startRow,endRow,pageStart,pageEnd;
+    startRow,endRow,pageStart,pageEnd,pagePrev,pageNext;
+	
 	boolean prevBlock,nextBlock;
 	
 	
@@ -81,5 +81,17 @@ public class Page {
 	}
 	public void setNextBlock(boolean nextBlock) {
 		this.nextBlock = (pageNum < totalPage) ? true : false;
+	}
+	public int getPagePrev() {
+		return pagePrev;
+	}
+	public void setPagePrev(int pagePrev) {
+		this.pagePrev = pageEnd-pageSize;
+	}
+	public int getPageNext() {
+		return pageNext;
+	}
+	public void setPageNext(int pageNext) {
+		this.pageNext = pageStart+pageSize;
 	}
 }

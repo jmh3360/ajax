@@ -20,3 +20,13 @@
 /*mypage table*/
 #myPageInfo tr{border:  1px soid black}
 #myPageInfo tbody tr td{border:  1px soid black}
+.flag-1{width:20%}
+.flag-2{width:20%}
+.flag-3{width:20%}
+.flag-4{width:20%}
+.flag-5{width:20%}
+
+/* popup */
+.popup{position: relative;background: #FFF;padding:'
+      '20px;width: auto;max-width: 500px;margin: 20px auto;
+}

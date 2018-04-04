@@ -23,3 +23,5 @@ CREATE TABLE MEMBER
  select * from member;
  INSERT INTO board(title, content, id)
      VALUES ('zz', 'xx', '장만호');
+     
+

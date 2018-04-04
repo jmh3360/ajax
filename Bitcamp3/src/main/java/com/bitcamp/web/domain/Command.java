@@ -9,6 +9,6 @@ import lombok.Data;
 @Data
 @Component @Lazy
 public class Command {
-	protected String data1,data2;
+	protected String data1,data2,data3,type,id,pass;
 	protected Page paging;
 }

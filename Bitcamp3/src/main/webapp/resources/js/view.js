@@ -1,6 +1,136 @@
 /**
  * 
+ * 	+'<select name="user">'
+	+'    <option value="member">회원</option>'
+	+'    <option value="admin">관리자</option>'
+	+'</select>'
+ * 
+ * var setCountArray=x=>{
+    var a = new Array();
+    for(var i=1; i<=x; i++){
+        a.push(i);
+    }
+    return a;
+}
  */
+
+var createOption=x=>{
+	var temp = '';
+	$.each(x.arr,(i,j)=>{
+		temp += '<option id="option-'+i+'" value="'+j+'"></option>'
+	});
+	return temp;
+}
+var createSelect =x=>{
+	return '<select id="select-'+x.id+'" name="'+x.name+'"></select>'
+}
+var createForm =x=>{
+	return '<form id = "'+x.id+'" action="'+x.action+'" method="post"></form>'
+}
+var boardFileUpload=x=>{
+
+    return '<fieldset style="border:5px solid blue; height: 400px; width: 300px; background-color: white; margin-left: 550px;">'
+        +'<div style="text-align: center; color: black">'
+          +'<h1>FILE UPLOAD</h1>'
+        +'</div>'
+        +'<div id="div-fileupload" style="text-align: center">'
+          +'<input type="file" size="30" name="file" style="display:inline-block; margin-top: 150px;"><br /><br /><br />'
+      /*    +'<input  style="margin-top: 50px" type="submit" value="업로드" class="btn btn-primary btn-lg"/>'
+          +'<input style="margin-top: 50px" type="reset" value="취 소" class="btn btn-default btn-lg"/>'*/
+        +'</div>'
+    +'</fieldset>'
+}
+var boardWriting=x=>{
+	return '<div class="board_type1_write_wrap">'
+	+'      <table class="board_write_type1">'
+	+'        <tr>'
+	+'          <td class="left" >'
+	+'            <div class="column_name">글제목</div>'
+	+'            <div class="column_desc"><input id="input-board-title" type="text" name="title" class="text_type1"/></div>'
+	+'          </td>'
+	+'        </tr>'
+	+'        <tr>'
+	+'          <td class="left">'
+	+'            <ul class="split_three">'
+	+'              <li>'
+	+'                <div class="column_name">닉네임</div>'
+	+'                <div class="column_desc"><input id="input-board-name" type="text" name="nickName" class="text_type1"/></div>'
+	+'              </li>'
+	+'              <li>'
+	+'                <div class="column_name">옵션</div>'
+	+'                <div class="column_desc">'
+	+'                  <div>'
+	+'                  <table><tr>'
+	+'                    <td><a id="a-file-upload" class="popup-with-form" href="#test-form"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"> 파일업로드</span></a></td>'
+	+'      <td style="width: 100px; height: 100px"><div style="float: left; width: 100px; height: 100px"><img style="width: 50px; height: 50px" src="" alt="" /></div></td>'
+	+'                  </tr></table>'
+	+'                  </div>'
+	+'                </div>'
+	+'              </li> '
+	+'            </ul>'
+	+'          </td>'
+	+'        </tr>'
+	+'        <tr>'
+	+'          <td class="left" >'
+	+'            <div class="column_name">내용</div>'
+	+'            '
+	+'            <div class="column_desc">'
+	+'              <textarea id="textarea-board-content" name="content" rows="" cols="" class="textarea_type1"></textarea>&nbsp;'
+	+'            </div>'
+	+'          </td>'
+	+'        </tr> '
+	+'      </table>'
+	+'    </div>'
+	+'    <!-- ok -->'
+	+'    <div class="button_margin"></div>'
+	+'    <div class="board_type1_write_button_wrap">'
+	+'      <div id = "div-board-submitbox">'
+	+'        <input type="submit" value="확 인"/>'
+	+'        <input type="reset" value="취 소"/>'
+	+'      </div>  '
+	+'    </div>'
+	+'  </div>'
+}
+var createNav=x=>{
+	return '<nav id="'+x.id+'" class="'+x.clazz+'"></nav>'
+}
+var pagenation=x=>{
+	return '<ul class="pagination">'
+	+'    <c:if test="${page.prevBlock}">'
+	+'      <li>'
+	+'          <a href="#" aria-label="Previous" onclick="app.boardList'
+	+'(${page.pageEnd-page.pageSize});return false;">'
+	+'            <span aria-hidden="true">&laquo;</span>'
+	+'          </a>'
+	+'      </li>'
+	+'    </c:if>'
+	+'    '
+	+'  <c:forEach begin="${page.pageStart}" end="${page.pageEnd}"  step="1"  varStatus="i">'
+	+' '
+	+'        <c:choose>'
+	+'              <c:when test="${i.index eq page.pageNum}">'
+	+'                <li>'
+	+'                <a style="color: red" href="${path.context}/board/list?pageNum=${i.index}">${i.index}</a>'
+	+'                </li>'
+	+'               </c:when>'
+	+'               '
+	+'               <c:otherwise>'
+	+'                <li>'
+	+'                <a href="${path.context}/board/list?pageNum=${i.index}">${i.index}</a>'
+	+'                </li>'
+	+'               </c:otherwise>'
+	+'         </c:choose>'
+	+'      </c:forEach>'
+	+'    '
+	+'    <c:if test="${page.nextBlock}">'
+	+'      <li>'
+	+'        <a href="#" aria-label="Next" onclick="app.boardList(${page.pageStart+page.pageSize});return false;">'
+	+'          <span aria-hidden="true">&raquo;</span>'
+	+'        </a>'
+	+'      </li>'
+	+'    </c:if>'
+	+'  </ul>'
+}
 var loginOutBox=x=>{
 	return '<table id="'+x+'">'
 	+'    <tr>'
@@ -19,8 +149,8 @@ var loginOutBox=x=>{
 	+'      </td>'
 	+'    </tr>'
 	+'  </table> '
-	+' <a id="login-admin-link" href="#"> 관리자 </a>'
-	+'<a id="login-join-link" href="#"> 회원가입 </a>'
+	+' <a id="a-admin-link" href="#"> 관리자 </a>'
+	+'<a id="a-join-link" href="#"> 회원가입 </a>'
 
 }
 var loginInBox=x=>{
@@ -43,7 +173,7 @@ function nav(){
 	+'    </div>'
 	+'    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">'
 	+'      <ul class="nav navbar-nav">'
-	+'        <li id="a-home" class="active"><a href="#">'
+	+'        <li id="li-home" class="active"><a href="#">'
 	+'          <span class="glyphicon glyphicon-home" aria-hidden="true"> HOME</span></a></li>'
 	+'        <li><a id="a-about" href="#">'
 	+'          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"> about</span>'
@@ -60,12 +190,20 @@ function nav(){
 	+'            <li id = application-btn></li>'
 	+'          </ul>'
 	+'        </li>'
-	+'      </ul>'
-	+'      <form class="navbar-form navbar-left" role="search">'
-	+'        <div class="form-group">'
-	+'          <input type="text" class="form-control" placeholder="Search">'
+	//검색 필터
+	+'      <form id="form-search" class="navbar-form navbar-left" role="search">'
+	+'        <li id="li-search-option" class="dropdown" style="margin-left: 500px">'
+/*	+'<select name="user">'
+	+'    <option value="member">회원</option>'
+	+'    <option value="admin">관리자</option>'
+	+'</select>'*/
+	+'        </li>'
+	+'			<li>'
+	+'        <div id="div-search" class="form-group">'
+	+'          <input id="input-search" type="text" class="form-control" placeholder="Search">'
 	+'        </div>'
-	+'        <button type="submit" class="btn btn-default">검 색</button>'
+	/*+'        <button type="submit" class="btn btn-default">검 색</button>'*/
+	+'		</li>'	
 	+'      </form>'
 	+'      <ul class="nav navbar-nav navbar-right">'
 	+'        <li class="dropdown">'
@@ -127,8 +265,11 @@ function ApplicationBtn(){
 	return  '<a id="a-lotto" href="#"> 응용 </a>';
 }
 */
+var createFont=x=>{
+	return'<font>'+x.val+'</font>'
+}
 var createATag=x=>{
-	return '<a id ="'+x.id+'" href="#"> '+x.val+'</a>';
+	return '<a id ="'+x.id+'" href="'+x.link+'"> '+x.val+'</a>';
 }
 var createATag2=x=>{
 	return '<a id="'+x.id+'" href="#"> '+x.val+'</a>';
@@ -176,10 +317,32 @@ var setCountArray=x=>{
     }
     return a;
 }
-
+var createViewTr=x=>{
+	var tmep ='';
+	alert('trNum의 값은'+x.trNum);
+	$.each(x.trNum,(i,j)=>{
+		alert('trㅇ으each문 안 입니다'+j);
+		temp +='<tr id="tr-'+x.id+'-'+j+'" class="'+x.clazz+'">'
+		+createViewTd({
+			tdNum:x.tdNum,
+			tdClazz:x.tdClazz,
+			id:x.id
+		})+'</tr>';
+	});
+	return temp;
+}
+var createViewTd=x=>{
+	alert('createViewTd오니?');
+	var temp ='';
+	$.each(x.tdNum,(i,j)=>{
+		temp +='<td id ="td-'+x.id+'-'+j+'" class ="'+x.tdClazz+'"></td>'
+	});
+	return temp;
+}
 var createTable=x=>{
 	return tab ='<table id ="'+x.id+'" class = "'+x.clazz+'"></table>'
 }
+//리스트를 이용하는 tr
 var createTr=x=>{
 	   var temp = '';
 	   var trnum=0;
@@ -189,18 +352,21 @@ var createTr=x=>{
 	                   +createTd({
 	                       list: j,
 	                       q: trnum,
-	                       clazz: x.tdClazz
+	                       klazz: x.jason.tdClazz
 	                       })+'</tr>';
 	   });
+	   
 	   return temp;
 	}
+//list를 이용하는 td
 	var createTd=x=>{
 	   var temp = '';
 	   var w=0;
 	    $.each(x.list,(k,j)=>{
 	        w++;
-	        temp +='<td id="td_'+x.q+'_'+w+'" class="'+x.clazz+'">'
+	        temp +='<td id="td_'+x.q+'_'+w+'" class="'+x.klazz+w+'">'
 	                                        +'&nbsp;'+j+'</td>';
+	        
 	    });
 	   return temp;
 	}
@@ -210,6 +376,8 @@ var createTh =x=>{
 	$.each(x.list,(i,j)=>{
 		th+='<th>'+j+'</th>'
 	});
+	th += '</tr>'
+	return th;
 }
 var createArrayTab=x=>{
 	var tab ='<table id = "'+x.id+'" class = "'+x.clazz+'">'
@@ -251,12 +419,12 @@ var createRes=x=>{
 	
 	return h;
 }
-var createUl=(x,y)=>{
+var createUl=x=>{
 	
-	return '<ul id ="'+x+'" class="'+y+'"></ul>';
+	return '<ul id ="'+x.id+'" class="'+x.clazz+'"></ul>';
 }
-var createLi=(x,y,z)=>{
-	return '<li id ="'+x+'" class="'+y+'"></li>';
+var createLi=x=>{
+	return '<li id ="'+x.id+'" class="'+x.clazz+'"></li>';
 }
 var sequenceMonitor2=()=>{
 	
@@ -299,6 +467,6 @@ var createButton =x=>{
 var createText=x=>{
 	return '<h1 id = "'+x+'"></h1>'
 }
-var createInput = (x,y)=>{
-	return '<input id = "'+x+'" type = "'+y+'"/>'
+var createInput = x=>{
+	return '<input id = "'+x.id+'" value="'+x.val+'" class="'+x.clazz+'" type = "'+x.type+'"/>'
 }
